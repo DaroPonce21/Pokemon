@@ -1,4 +1,5 @@
 const axios = require('axios');
+const { Pokemon, Type } = require('../config/db')
 
 const POKEWEB151 = 'https://pokeapi.co/api/v2/pokemon?offset=0&limit=151'
 
@@ -31,4 +32,26 @@ const allPokemonsWeb = async () => {
     }
 }
 
-module.exports = { allPokemonsWeb }
+const allPokemonsDb = async () => {
+    return await Pokemon.findAll({
+        include: {
+            model: Type,
+            attributes: ['name'],
+            throught: {
+                attributes: []
+            }
+        }
+    })
+}
+
+const getAllPokemons = async () => {
+    const apiPoke = await allPokemonsWeb()
+    const dbPoke = await allPokemonsDb()
+
+    const allPoke = apiPoke.concat(dbPoke).sort((a, b) => {
+        return a.id < b.id ? -1 : 1
+    })
+    return allPoke
+}
+
+module.exports = { getAllPokemons }
