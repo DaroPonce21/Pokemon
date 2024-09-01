@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
     image: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue:'https://static.wikia.nocookie.net/pokemon-fano/images/6/6f/Poke_Ball.png/revision/latest?cb=20140520015336'
+      defaultValue: 'https://www.pinpng.com/pngs/m/8-82850_poke-ball-png-pokeball-png-transparent-png.png'
     },
     hp: {
       type: DataTypes.STRING,

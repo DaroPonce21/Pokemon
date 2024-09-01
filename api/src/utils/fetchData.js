@@ -23,7 +23,6 @@ const allPokemonsWeb = async () => {
                 type: dataPoke.data.types.map(t => t.type.name)
             }
         }))
-        console.log(pokemons)
         return pokemons
 
     } catch (error) {
@@ -49,7 +48,7 @@ const getAllPokemons = async () => {
     const dbPoke = await allPokemonsDb()
 
     const allPoke = apiPoke.concat(dbPoke).sort((a, b) => {
-        return a.id < b.id ? -1 : 1
+        return parseInt(a.id) < parseInt(b.id) ? -1 : 1
     })
     return allPoke
 }
